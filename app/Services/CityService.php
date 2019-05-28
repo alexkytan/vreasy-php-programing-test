@@ -24,7 +24,18 @@ class CityService
      */
     public function search(array $searchParams = []): Collection
     {
-        return City::where($searchParams);
+        $query = City::where('name', $searchParams['name']);
+
+        if ( !empty($searchParams['lng']) && !empty($searchParams['lat'])) {
+            $query->orWhere(
+                [
+                    'lng' => $searchParams['lng'],
+                    'lat' => $searchParams['lat'],
+                ]
+            );
+        }
+
+        return $query->get();
     }
 
     /**

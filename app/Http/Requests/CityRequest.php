@@ -23,6 +23,14 @@ class CityRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->getMethod() === self::METHOD_GET) {
+            return [
+                'name' => '',
+                'lat'  => 'numeric|between:-90,90',
+                'lng'  => 'numeric|between:-180,180',
+            ];
+        }
+
         return [
             'name' => 'required',
             'lat'  => 'required|numeric|between:-90,90',
