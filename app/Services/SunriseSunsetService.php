@@ -24,10 +24,13 @@ class SunriseSunsetService
     public function getByCoordinates(
         float $latitude,
         float $longitude,
-        string $date = SunriseSunsetAPIInterface::DEFAULT_DATE,
-        string $timezone = SunriseSunsetAPIInterface::DEFAULT_TIMEZONE
+        ?string $date = SunriseSunsetAPIInterface::DEFAULT_DATE,
+        ?string $timezone = SunriseSunsetAPIInterface::DEFAULT_TIMEZONE
     ): SunriseSunsetModel
     {
+        $date = $date ?? SunriseSunsetAPIInterface::DEFAULT_DATE;
+        $timezone = $timezone ?? SunriseSunsetAPIInterface::DEFAULT_TIMEZONE;
+
         return $this->api->get($latitude, $longitude, $date, $timezone);
     }
 }

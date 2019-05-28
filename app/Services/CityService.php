@@ -5,7 +5,6 @@ namespace App\Services;
 
 
 use App\Models\City;
-use Illuminate\Database\Eloquent\Collection;
 
 class CityService
 {
@@ -20,9 +19,9 @@ class CityService
 
     /**
      * @param array $searchParams
-     * @return Collection
+     * @return City
      */
-    public function search(array $searchParams = []): Collection
+    public function search(array $searchParams = []): City
     {
         $query = City::where('name', $searchParams['name']);
 
@@ -35,7 +34,7 @@ class CityService
             );
         }
 
-        return $query->get();
+        return $query->firstOrFail();
     }
 
     /**

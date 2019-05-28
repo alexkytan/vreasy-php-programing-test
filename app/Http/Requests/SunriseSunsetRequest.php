@@ -24,9 +24,10 @@ class SunriseSunsetRequest extends FormRequest
     public function rules()
     {
         return [
-            'lat' => 'required|numeric|between:-90,90',
-            'lng' => 'required|numeric|between:-180,180',
-            'date' => '',
+            'cityName' => 'required_without:lng,lat|string',
+            'date' => 'string',
+            'lat' => 'required_with:lng|numeric|between:-90,90',
+            'lng' => 'required_with:lat|numeric|between:-180,180',
             'timezone' => 'timezone',
         ];
     }
