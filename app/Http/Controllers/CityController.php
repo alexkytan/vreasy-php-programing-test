@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CityRequest;
+use App\Http\Resources\CityCollection;
 use App\Models\City;
 use App\Managers\CityManager;
 use Illuminate\Http\Request;
@@ -27,15 +28,17 @@ class CityController extends Controller
     /**
      * Display a listing of the resource.
      * @param CityRequest $request
-     * @return City|\Illuminate\Database\Eloquent\Collection
+     * @return CityCollection
      */
     public function index(CityRequest $request)
     {
         $searchData = $request->validated();
 
-        return count($searchData) === 0
-            ? $this->service->getAll()
-            : $this->service->search($request->validated());
+        if (count($searchData) !== 0) {
+            $this->service->search($request->validated());
+        }
+
+        return new CityCollection($this->service->getAll());
     }
 
     /**

@@ -79,7 +79,11 @@ class CityTest extends TestCase
         $this->get(route('cities.index'))
             ->assertStatus(200)
             ->assertJsonStructure([
-                '*' => ['id', 'name', 'lat', 'lng'],
+                'data' => [
+                    '*' => ['id', 'name', 'lat', 'lng']
+                ],
+                'links',
+                'meta'
             ]);
     }
 }

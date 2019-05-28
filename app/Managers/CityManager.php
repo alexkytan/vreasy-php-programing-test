@@ -6,10 +6,12 @@ namespace App\Managers;
 
 use App\Models\City;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
+use \Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CityManager
 {
+    const DEFAULT_PER_PAGE = 3;
+
     /**
      * @param array $data
      * @return City
@@ -76,10 +78,10 @@ class CityManager
     }
 
     /**
-     * @return Collection
+     * @return LengthAwarePaginator
      */
-    public function getAll(): Collection
+    public function getAll(): LengthAwarePaginator
     {
-        return City::all();
+        return City::paginate(self::DEFAULT_PER_PAGE);
     }
 }
