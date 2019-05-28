@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
             'App\ExternalAPIClients\SunriseSunsetAPIInterface',
             'App\ExternalAPIClients\SunriseSunsetAPI'
         );
+
+        if ($this->app->environment() !== 'production') {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
     }
 
     /**
