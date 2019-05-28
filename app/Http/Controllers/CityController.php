@@ -4,42 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Http\Requests\CityRequest;
+use App\Services\CityService;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
+    protected $service;
+
+    public function __construct(
+        CityService $service
+    )
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CityRequest $request)
     {
-        return City::all();
+        return $this->service->search($request->validated());
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  CityRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(CityRequest $request)
     {
-        $city = City::create($request->validated());
-
-        return $city;
+        return $this->service->create($request->validated());
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  City  $city
-     * @return \Illuminate\Http\Response
      */
     public function show(City $city)
     {
-        return City::findOrFail($city);
+        return $this->service->find($city);
     }
 
     /**
@@ -51,25 +51,21 @@ class CityController extends Controller
      */
     public function update(CityRequest $request, int $id)
     {
-        $city = City::findOrFail($id);
-        $city->fill($request->validated());
-        $city->save();
-
-        return response()->json($city);
+        return response()->json(
+            $this->service->update($request->validated(), $id)
+        );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param CityRequest $request
+     * @param Request $request
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CityRequest $request, int $id)
+    public function destroy(Request $request, int $id)
     {
-        $city = City::findOrFail($id);
-
-        if ($city->delete()) {
+        if ($this->service->remove($id)) {
             return response(null, 204);
         }
     }
