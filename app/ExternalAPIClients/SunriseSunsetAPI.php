@@ -29,10 +29,16 @@ class SunriseSunsetAPI implements SunriseSunsetAPIInterface
      * @param float $latitude
      * @param float $longitude
      * @param string $date
+     * @param string $timezone
      * @return SunriseSunsetModel
      * @throws SunriseSunsetAPIException
      */
-    public function get(float $latitude, float $longitude, string $date = self::DEFAULT_DATE): SunriseSunsetModel
+    public function get(
+        float $latitude,
+        float $longitude,
+        string $date = self::DEFAULT_DATE,
+        string $timezone = self::DEFAULT_TIMEZONE
+    ): SunriseSunsetModel
     {
         try {
             $response = $this->client->request('GET', self::GET_URI, [
@@ -46,7 +52,7 @@ class SunriseSunsetAPI implements SunriseSunsetAPIInterface
 
             $responseData = json_decode($response->getBody(), true);
 
-            return new SunriseSunsetModel($responseData['results']);
+            return new SunriseSunsetModel($responseData['results'], $timezone);
         } catch (GuzzleException $e) {
             throw new SunriseSunsetAPIException(
                 Psr7\str($e->getResponse())

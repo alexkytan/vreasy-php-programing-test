@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SunriseSunsetRequest;
 use App\Services\SunriseSunsetService;
-use Illuminate\Http\Request;
 
 class SunriseSunsetController extends Controller
 {
@@ -16,8 +16,14 @@ class SunriseSunsetController extends Controller
         $this->service = $service;
     }
 
-    public function get()
+    public function get(SunriseSunsetRequest $request)
     {
-        // TODO: integrate get method from service
+
+        return $this->service->getByCoordinates(
+            $request->get('lat'),
+            $request->get('lng'),
+            $request->get('date'),
+            $request->get('timezone')
+        );
     }
 }

@@ -15,6 +15,8 @@ abstract class ExternalAPIModel implements Arrayable, Jsonable
     use Concerns\HasAttributes;
     use Concerns\HidesAttributes;
 
+    protected $timezone;
+
     /**
      * Create a new Eloquent model instance.
      *
@@ -66,7 +68,7 @@ abstract class ExternalAPIModel implements Arrayable, Jsonable
      */
     public function toArray()
     {
-        return array_merge($this->attributesToArray(), $this->relationsToArray());
+        return $this->attributesToArray();
     }
 
     /**
@@ -111,15 +113,5 @@ abstract class ExternalAPIModel implements Arrayable, Jsonable
         }
 
         return $this;
-    }
-
-    /**
-     * Get an attribute array of all arrayable relations.
-     *
-     * @return array
-     */
-    protected function getArrayableRelations()
-    {
-        return [];
     }
 }

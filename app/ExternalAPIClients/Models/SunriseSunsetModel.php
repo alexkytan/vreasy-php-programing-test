@@ -3,6 +3,8 @@
 
 namespace App\ExternalAPIClients\Models;
 
+use App\Utils\DateUtil;
+
 
 /**
  * Class EstimateItem
@@ -23,6 +25,8 @@ namespace App\ExternalAPIClients\Models;
  */
 class SunriseSunsetModel extends ExternalAPIModel
 {
+    const DATE_ATTRIBUTE_FORMAT = 'Y-m-d';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -77,12 +81,47 @@ class SunriseSunsetModel extends ExternalAPIModel
     protected $appends = ['date'];
 
     /**
+     * @var string
+     */
+    protected $timezone;
+
+    public function __construct(array $attributes = [], string $timezone = null)
+    {
+        parent::__construct($attributes);
+
+        $this->timezone = $timezone;
+    }
+
+    /**
      * Get the date of sunrise/sunset.
      *
      * @return string
+     * @throws \Exception
      */
     public function getDateAttribute()
     {
-        return $this->attributes['sunrise'];
+        return DateUtil::getDateWithTimezone($this->attributes['sunrise'], $this->timezone, self::DATE_ATTRIBUTE_FORMAT);
+    }
+
+    /**
+     * Get the date of sunrise/sunset.
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getSunriseAttribute()
+    {
+        return DateUtil::getDateWithTimezone($this->attributes['sunrise'], $this->timezone);
+    }
+
+    /**
+     * Get the date of sunrise/sunset.
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getSunsetAttribute()
+    {
+        return DateUtil::getDateWithTimezone($this->attributes['sunset'], $this->timezone);
     }
 }
