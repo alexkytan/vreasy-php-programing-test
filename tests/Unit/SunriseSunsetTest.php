@@ -10,6 +10,11 @@ class SunriseSunsetTest extends TestCase
     public function testCanShowCity()
     {
         $this->call('GET', route('get_sunrise-sunset'), ['cityName' => 'New York'])
-            ->assertStatus(200);
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'sunrise',
+                'sunset',
+                'date',
+            ]);
     }
 }
