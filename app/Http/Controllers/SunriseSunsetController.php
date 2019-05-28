@@ -3,29 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SunriseSunsetRequest;
-use App\Services\CityService;
-use App\Services\SunriseSunsetService;
+use App\Managers\CityManager;
+use App\Managers\SunriseSunsetManager;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SunriseSunsetController extends Controller
 {
     /**
-     * @var SunriseSunsetService
+     * @var SunriseSunsetManager
      */
     protected $service;
 
     /**
-     * @var CityService
+     * @var CityManager
      */
     protected $cityService;
 
     /**
      * SunriseSunsetController constructor.
-     * @param SunriseSunsetService $service
-     * @param CityService $cityService
+     * @param SunriseSunsetManager $service
+     * @param CityManager $cityService
      */
-    public function __construct(SunriseSunsetService $service, CityService $cityService)
+    public function __construct(SunriseSunsetManager $service, CityManager $cityService)
     {
         $this->service = $service;
         $this->cityService = $cityService;

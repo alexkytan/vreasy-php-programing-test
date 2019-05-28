@@ -4,22 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CityRequest;
 use App\Models\City;
-use App\Services\CityService;
+use App\Managers\CityManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class CityController extends Controller
 {
     /**
-     * @var CityService
+     * @var CityManager
      */
     protected $service;
 
     /**
      * CityController constructor.
-     * @param CityService $service
+     * @param CityManager $service
      */
-    public function __construct(CityService $service)
+    public function __construct(CityManager $service)
     {
         $this->service = $service;
     }

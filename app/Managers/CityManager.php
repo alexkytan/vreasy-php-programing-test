@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Managers;
 
 
 use App\Models\City;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
-class CityService
+class CityManager
 {
     /**
      * @param array $data

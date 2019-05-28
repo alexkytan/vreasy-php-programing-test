@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Managers;
 
 
 use App\ExternalAPIClients\Models\SunriseSunsetModel;
 use App\ExternalAPIClients\SunriseSunsetAPIInterface;
 
-class SunriseSunsetService
+class SunriseSunsetManager
 {
     /**
      * @var SunriseSunsetAPIInterface
@@ -15,7 +15,7 @@ class SunriseSunsetService
     protected $api;
 
     /**
-     * SunriseSunsetService constructor.
+     * SunriseSunsetManager constructor.
      * @param SunriseSunsetAPIInterface $api
      */
     public function __construct(SunriseSunsetAPIInterface $api)
