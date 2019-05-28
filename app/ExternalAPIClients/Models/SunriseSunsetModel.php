@@ -87,6 +87,11 @@ class SunriseSunsetModel extends ExternalAPIModel
      */
     protected $timezone;
 
+    /**
+     * SunriseSunsetModel constructor.
+     * @param array $attributes
+     * @param string|null $timezone
+     */
     public function __construct(array $attributes = [], string $timezone = null)
     {
         parent::__construct($attributes);

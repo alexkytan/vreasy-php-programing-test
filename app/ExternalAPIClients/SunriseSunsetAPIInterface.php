@@ -12,6 +12,13 @@ interface SunriseSunsetAPIInterface
     const DEFAULT_DATE = 'today';
     const DEFAULT_TIMEZONE = DateUtil::DEFAULT_TIMEZONE;
 
+    /**
+     * @param float $latitude
+     * @param float $longitude
+     * @param string $date
+     * @param string $timezone
+     * @return SunriseSunsetModel
+     */
     public function get(
         float $latitude,
         float $longitude,

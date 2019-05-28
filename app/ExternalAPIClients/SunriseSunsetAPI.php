@@ -19,6 +19,9 @@ class SunriseSunsetAPI implements SunriseSunsetAPIInterface
      */
     protected $client;
 
+    /**
+     * SunriseSunsetAPI constructor.
+     */
     public function __construct()
     {
         $this->client = new Client(['base_uri' => self::URL]);

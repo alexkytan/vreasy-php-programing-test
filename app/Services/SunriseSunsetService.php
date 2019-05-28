@@ -14,13 +14,22 @@ class SunriseSunsetService
      */
     protected $api;
 
-    public function __construct(
-        SunriseSunsetAPIInterface $api
-    )
+    /**
+     * SunriseSunsetService constructor.
+     * @param SunriseSunsetAPIInterface $api
+     */
+    public function __construct(SunriseSunsetAPIInterface $api)
     {
         $this->api = $api;
     }
 
+    /**
+     * @param float $latitude
+     * @param float $longitude
+     * @param string|null $date
+     * @param string|null $timezone
+     * @return SunriseSunsetModel
+     */
     public function getByCoordinates(
         float $latitude,
         float $longitude,

@@ -10,20 +10,31 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SunriseSunsetController extends Controller
 {
+    /**
+     * @var SunriseSunsetService
+     */
     protected $service;
 
+    /**
+     * @var CityService
+     */
     protected $cityService;
 
-    public function __construct(
-        SunriseSunsetService $service,
-        CityService $cityService
-    ) {
+    /**
+     * SunriseSunsetController constructor.
+     * @param SunriseSunsetService $service
+     * @param CityService $cityService
+     */
+    public function __construct(SunriseSunsetService $service, CityService $cityService)
+    {
         $this->service = $service;
         $this->cityService = $cityService;
     }
 
     /**
      * Display a listing of the resource.
+     * @param SunriseSunsetRequest $request
+     * @return \App\ExternalAPIClients\Models\SunriseSunsetModel
      */
     public function index(SunriseSunsetRequest $request)
     {
@@ -45,6 +56,10 @@ class SunriseSunsetController extends Controller
         );
     }
 
+    /**
+     * @param $cityName
+     * @return \App\Models\City
+     */
     private function findCity($cityName)
     {
         try {

@@ -10,8 +10,15 @@ use Illuminate\Http\Response;
 
 class CityController extends Controller
 {
+    /**
+     * @var CityService
+     */
     protected $service;
 
+    /**
+     * CityController constructor.
+     * @param CityService $service
+     */
     public function __construct(CityService $service)
     {
         $this->service = $service;
@@ -19,6 +26,8 @@ class CityController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @param CityRequest $request
+     * @return City|\Illuminate\Database\Eloquent\Collection
      */
     public function index(CityRequest $request)
     {
@@ -31,6 +40,8 @@ class CityController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param CityRequest $request
+     * @return City
      */
     public function store(CityRequest $request)
     {
@@ -39,6 +50,8 @@ class CityController extends Controller
 
     /**
      * Display the specified resource.
+     * @param City $city
+     * @return City
      */
     public function show(City $city)
     {
@@ -65,6 +78,7 @@ class CityController extends Controller
      * @param Request $request
      * @param int $id
      * @return Response
+     * @throws \Exception
      */
     public function destroy(Request $request, int $id)
     {
