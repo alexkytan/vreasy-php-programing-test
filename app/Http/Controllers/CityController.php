@@ -14,31 +14,31 @@ class CityController extends Controller
     /**
      * @var CityManager
      */
-    protected $service;
+    protected $manager;
 
     /**
      * CityController constructor.
-     * @param CityManager $service
+     * @param CityManager $manager
      */
-    public function __construct(CityManager $service)
+    public function __construct(CityManager $manager)
     {
-        $this->service = $service;
+        $this->manager = $manager;
     }
 
     /**
      * Display a listing of the resource.
      * @param CityRequest $request
-     * @return CityCollection
+     * @return CityCollection|City
      */
     public function index(CityRequest $request)
     {
         $searchData = $request->validated();
 
         if (count($searchData) !== 0) {
-            $this->service->search($request->validated());
+            return $this->manager->search($request->validated());
         }
 
-        return new CityCollection($this->service->getAll());
+        return new CityCollection($this->manager->getAll());
     }
 
     /**
@@ -48,7 +48,7 @@ class CityController extends Controller
      */
     public function store(CityRequest $request)
     {
-        return $this->service->create($request->validated());
+        return $this->manager->create($request->validated());
     }
 
     /**
@@ -58,7 +58,7 @@ class CityController extends Controller
      */
     public function show(City $city)
     {
-        return $this->service->find($city);
+        return $this->manager->find($city);
     }
 
     /**
@@ -71,7 +71,7 @@ class CityController extends Controller
     public function update(CityRequest $request, int $id)
     {
         return response()->json(
-            $this->service->update($request->validated(), $id)
+            $this->manager->update($request->validated(), $id)
         );
     }
 
@@ -85,7 +85,7 @@ class CityController extends Controller
      */
     public function destroy(Request $request, int $id)
     {
-        if ($this->service->remove($id)) {
+        if ($this->manager->remove($id)) {
             return response(null, 204);
         }
     }

@@ -13,22 +13,22 @@ class SunriseSunsetController extends Controller
     /**
      * @var SunriseSunsetManager
      */
-    protected $service;
+    protected $manager;
 
     /**
      * @var CityManager
      */
-    protected $cityService;
+    protected $cityManager;
 
     /**
      * SunriseSunsetController constructor.
-     * @param SunriseSunsetManager $service
-     * @param CityManager $cityService
+     * @param SunriseSunsetManager $manager
+     * @param CityManager $cityManager
      */
-    public function __construct(SunriseSunsetManager $service, CityManager $cityService)
+    public function __construct(SunriseSunsetManager $manager, CityManager $cityManager)
     {
-        $this->service = $service;
-        $this->cityService = $cityService;
+        $this->manager = $manager;
+        $this->cityManager = $cityManager;
     }
 
     /**
@@ -48,7 +48,7 @@ class SunriseSunsetController extends Controller
             $lng = $city->lng;
         }
 
-        return $this->service->getByCoordinates(
+        return $this->manager->getByCoordinates(
             $lat,
             $lng,
             $request->get('date'),
@@ -63,7 +63,7 @@ class SunriseSunsetController extends Controller
     private function findCity($cityName)
     {
         try {
-            return $this->cityService->search([
+            return $this->cityManager->search([
                 'name' => $cityName
             ]);
         } catch (Exception $exception) {
