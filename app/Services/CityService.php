@@ -44,7 +44,7 @@ class CityService
      */
     public function find(City $city): City
     {
-        return City::findOrFail($city);
+        return City::findOrFail($city)->first();
     }
 
     /**
