@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\City;
+use Illuminate\Database\Eloquent\Collection;
 
 class CityService
 {
@@ -64,11 +65,20 @@ class CityService
     /**
      * @param $id
      * @return bool
+     * @throws \Exception
      */
     public function remove($id): bool
     {
         $city = City::findOrFail($id);
 
         return $city->delete();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAll(): Collection
+    {
+        return City::all();
     }
 }

@@ -23,7 +23,11 @@ class CityController extends Controller
      */
     public function index(CityRequest $request)
     {
-        return $this->service->search($request->validated());
+        $searchData = $request->validated();
+
+        return count($searchData) === 0
+            ? $this->service->getAll()
+            : $this->service->search($request->validated());
     }
 
     /**
