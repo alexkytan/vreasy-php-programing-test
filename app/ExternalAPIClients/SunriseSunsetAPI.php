@@ -4,11 +4,10 @@
 namespace App\ExternalAPIClients;
 
 
-use App\Exceptions\SunriseSunsetAPIException;
 use App\ExternalAPIClients\Models\SunriseSunsetModel;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\GuzzleException;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class SunriseSunsetAPI implements SunriseSunsetAPIInterface
 {
@@ -31,7 +30,6 @@ class SunriseSunsetAPI implements SunriseSunsetAPIInterface
      * @param string $date
      * @param string $timezone
      * @return SunriseSunsetModel
-     * @throws SunriseSunsetAPIException
      */
     public function get(
         float $latitude,
@@ -54,9 +52,7 @@ class SunriseSunsetAPI implements SunriseSunsetAPIInterface
 
             return new SunriseSunsetModel($responseData['results'], $timezone);
         } catch (GuzzleException $e) {
-            throw new SunriseSunsetAPIException(
-                Psr7\str($e->getResponse())
-            );
+            throw new UnprocessableEntityHttpException($e->getMessage());
         }
     }
 }
