@@ -26,8 +26,7 @@ class SunriseSunsetService
         float $longitude,
         ?string $date = SunriseSunsetAPIInterface::DEFAULT_DATE,
         ?string $timezone = SunriseSunsetAPIInterface::DEFAULT_TIMEZONE
-    ): SunriseSunsetModel
-    {
+    ): SunriseSunsetModel {
         $date = $date ?? SunriseSunsetAPIInterface::DEFAULT_DATE;
         $timezone = $timezone ?? SunriseSunsetAPIInterface::DEFAULT_TIMEZONE;
 

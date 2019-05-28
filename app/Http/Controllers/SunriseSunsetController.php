@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SunriseSunsetRequest;
 use App\Services\CityService;
 use App\Services\SunriseSunsetService;
+use Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SunriseSunsetController extends Controller
@@ -16,8 +17,7 @@ class SunriseSunsetController extends Controller
     public function __construct(
         SunriseSunsetService $service,
         CityService $cityService
-    )
-    {
+    ) {
         $this->service = $service;
         $this->cityService = $cityService;
     }
@@ -51,7 +51,7 @@ class SunriseSunsetController extends Controller
             return $this->cityService->search([
                 'name' => $cityName
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw new NotFoundHttpException('Cannot find sunrise/sunset data for ' . $cityName);
         }
     }

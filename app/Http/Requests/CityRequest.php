@@ -26,15 +26,15 @@ class CityRequest extends FormRequest
         if ($this->getMethod() === self::METHOD_GET) {
             return [
                 'name' => '',
-                'lat'  => 'numeric|between:-90,90',
-                'lng'  => 'numeric|between:-180,180',
+                'lat' => 'numeric|between:-90,90',
+                'lng' => 'numeric|between:-180,180',
             ];
         }
 
         return [
             'name' => 'required',
-            'lat'  => 'required|numeric|between:-90,90',
-            'lng'  => 'required|numeric|between:-180,180',
+            'lat' => 'required|numeric|between:-90,90',
+            'lng' => 'required|numeric|between:-180,180',
         ];
     }
 }

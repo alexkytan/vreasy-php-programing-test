@@ -4,9 +4,10 @@
 namespace App\ExternalAPIClients\Models;
 
 
-use Illuminate\Database\Eloquent\Concerns;
+use DateTime;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Database\Eloquent\Concerns;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 
 
@@ -20,7 +21,7 @@ abstract class ExternalAPIModel implements Arrayable, Jsonable
     /**
      * Create a new Eloquent model instance.
      *
-     * @param  array  $attributes
+     * @param array $attributes
      * @return void
      */
     public function __construct(array $attributes = [])
@@ -30,6 +31,20 @@ abstract class ExternalAPIModel implements Arrayable, Jsonable
         $this->fill($attributes);
     }
 
+    /**
+     * Fill the model with an array of attributes.
+     *
+     * @param array $attributes
+     * @return $this
+     */
+    public function fill(array $attributes)
+    {
+        foreach ($attributes as $key => $value) {
+            $this->setAttribute($key, $value);
+        }
+
+        return $this;
+    }
 
     /**
      * Get the attributes that should be converted to dates.
@@ -58,26 +73,16 @@ abstract class ExternalAPIModel implements Arrayable, Jsonable
      */
     public function getDateFormat()
     {
-        return \DateTime::ISO8601;
-    }
-
-    /**
-     * Convert the model instance to an array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->attributesToArray();
+        return DateTime::ISO8601;
     }
 
     /**
      * Convert the model instance to JSON.
      *
-     * @param  int  $options
+     * @param int $options
      * @return string
      *
-     * @throws \Illuminate\Database\Eloquent\JsonEncodingException
+     * @throws JsonEncodingException
      */
     public function toJson($options = 0)
     {
@@ -101,17 +106,12 @@ abstract class ExternalAPIModel implements Arrayable, Jsonable
     }
 
     /**
-     * Fill the model with an array of attributes.
+     * Convert the model instance to an array.
      *
-     * @param  array  $attributes
-     * @return $this
+     * @return array
      */
-    public function fill(array $attributes)
+    public function toArray()
     {
-        foreach ($attributes as $key => $value) {
-            $this->setAttribute($key, $value);
-        }
-
-        return $this;
+        return $this->attributesToArray();
     }
 }

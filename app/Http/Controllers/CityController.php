@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
 use App\Http\Requests\CityRequest;
+use App\Models\City;
 use App\Services\CityService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CityController extends Controller
 {
     protected $service;
 
-    public function __construct(
-        CityService $service
-    )
+    public function __construct(CityService $service)
     {
         $this->service = $service;
     }
@@ -49,9 +48,9 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  CityRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param CityRequest $request
+     * @param int $id
+     * @return Response
      */
     public function update(CityRequest $request, int $id)
     {
@@ -65,7 +64,7 @@ class CityController extends Controller
      *
      * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Request $request, int $id)
     {

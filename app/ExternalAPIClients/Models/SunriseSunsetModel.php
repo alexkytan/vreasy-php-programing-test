@@ -4,22 +4,24 @@
 namespace App\ExternalAPIClients\Models;
 
 use App\Utils\DateUtil;
+use Carbon\Carbon;
+use Exception;
 
 
 /**
  * Class EstimateItem
  *
  * @property int $day_length
- * @property \Carbon\Carbon $astronomical_twilight_begin
- * @property \Carbon\Carbon $astronomical_twilight_end
- * @property \Carbon\Carbon $civil_twilight_begin
- * @property \Carbon\Carbon $civil_twilight_end
- * @property \Carbon\Carbon $date
- * @property \Carbon\Carbon $nautical_twilight_begin
- * @property \Carbon\Carbon $nautical_twilight_end
- * @property \Carbon\Carbon $solar_noon
- * @property \Carbon\Carbon $sunrise
- * @property \Carbon\Carbon $sunset
+ * @property Carbon $astronomical_twilight_begin
+ * @property Carbon $astronomical_twilight_end
+ * @property Carbon $civil_twilight_begin
+ * @property Carbon $civil_twilight_end
+ * @property Carbon $date
+ * @property Carbon $nautical_twilight_begin
+ * @property Carbon $nautical_twilight_end
+ * @property Carbon $solar_noon
+ * @property Carbon $sunrise
+ * @property Carbon $sunset
  *
  * @package App\ExternalAPIClients\Models
  */
@@ -96,7 +98,7 @@ class SunriseSunsetModel extends ExternalAPIModel
      * Get the date of sunrise/sunset.
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDateAttribute()
     {
@@ -107,7 +109,7 @@ class SunriseSunsetModel extends ExternalAPIModel
      * Get the date of sunrise/sunset.
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function getSunriseAttribute()
     {
@@ -118,7 +120,7 @@ class SunriseSunsetModel extends ExternalAPIModel
      * Get the date of sunrise/sunset.
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function getSunsetAttribute()
     {

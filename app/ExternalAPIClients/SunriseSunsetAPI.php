@@ -36,8 +36,7 @@ class SunriseSunsetAPI implements SunriseSunsetAPIInterface
         float $longitude,
         string $date = self::DEFAULT_DATE,
         string $timezone = self::DEFAULT_TIMEZONE
-    ): SunriseSunsetModel
-    {
+    ): SunriseSunsetModel {
         try {
             $response = $this->client->request('GET', self::GET_URI, [
                 'query' => [

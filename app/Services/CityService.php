@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\City;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
 class CityService
@@ -26,7 +27,7 @@ class CityService
     {
         $query = City::where('name', $searchParams['name']);
 
-        if ( !empty($searchParams['lng']) && !empty($searchParams['lat'])) {
+        if (!empty($searchParams['lng']) && !empty($searchParams['lat'])) {
             $query->orWhere(
                 [
                     'lng' => $searchParams['lng'],
@@ -65,7 +66,7 @@ class CityService
     /**
      * @param $id
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function remove($id): bool
     {
